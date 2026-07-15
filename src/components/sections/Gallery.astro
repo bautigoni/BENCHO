@@ -1,0 +1,34 @@
+---
+import { getImage } from 'astro:assets';
+import SectionHeading from '../ui/SectionHeading.astro';
+import GalleryLightbox, { type GalleryItem } from '../react/GalleryLightbox';
+import { GALLERY_IMAGES } from '../../data/gallery';
+
+const galleryItems: GalleryItem[] = await Promise.all(
+  GALLERY_IMAGES.map(async (item) => {
+    const thumb = await getImage({ src: item.image, width: 640, height: 640, fit: 'cover', format: 'webp' });
+    const full = await getImage({ src: item.image, width: 1600, format: 'webp' });
+    return {
+      thumbSrc: thumb.src,
+      fullSrc: full.src,
+      width: full.attributes.width as number,
+      height: full.attributes.height as number,
+      alt: item.alt,
+      project: item.project,
+      category: item.category
+    };
+  })
+);
+---
+
+<section class="container-page py-24 sm:py-32">
+  <SectionHeading
+    eyebrow="Proyectos Realizados"
+    title="Obras que hablan por sí solas."
+    description="Una muestra de fachadas, remodelaciones y terminaciones que llevamos adelante en countries y barrios de todo Buenos Aires."
+  />
+
+  <div class="mt-16">
+    <GalleryLightbox images={galleryItems} client:visible />
+  </div>
+</section>

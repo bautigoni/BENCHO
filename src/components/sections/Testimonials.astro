@@ -1,0 +1,15 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import TestimonialsCarousel from '../react/TestimonialsCarousel';
+import { TESTIMONIALS } from '../../data/testimonials';
+---
+
+<section class="bg-ink-50/60 py-24 sm:py-32">
+  <div class="container-page">
+    <SectionHeading eyebrow="Testimonios" title="La confianza de quienes ya construyeron con nosotros." />
+
+    <div class="mt-16">
+      <TestimonialsCarousel testimonials={TESTIMONIALS} client:visible />
+    </div>
+  </div>
+</section>

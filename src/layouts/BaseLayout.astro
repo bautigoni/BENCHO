@@ -1,0 +1,59 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+
+import Seo from '../components/seo/Seo.astro';
+import Analytics from '../components/Analytics.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton.astro';
+import { buildLocalBusinessSchema } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  ogImage?: string;
+}
+
+const { title, description, noindex, ogImage } = Astro.props;
+const localBusinessSchema = buildLocalBusinessSchema();
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f9640f" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <Seo title={title} description={description} noindex={noindex} ogImage={ogImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <Analytics />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main-content"
+      class="bg-brand-500 text-ink-950 sr-only rounded-full px-4 py-2 font-medium focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]"
+    >
+      Saltar al contenido principal
+    </a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloatingButton />
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

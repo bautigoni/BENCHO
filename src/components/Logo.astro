@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import logoMark from '../assets/images/logo-transparent.png';
+
+interface Props {
+  variant?: 'full' | 'mark';
+  theme?: 'dark' | 'light';
+  class?: string;
+}
+
+const { variant = 'full', theme = 'dark', class: className = '' } = Astro.props;
+const wordmarkColor = theme === 'dark' ? '#0c0c0e' : '#ffffff';
+---
+
+<a
+  href="/"
+  aria-label="Grupo CGR — Página de inicio"
+  class:list={['group inline-flex shrink-0 items-center gap-2.5', className]}
+>
+  <Image
+    src={logoMark}
+    alt=""
+    width={40}
+    height={40}
+    class="size-9 shrink-0 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+  />
+  {
+    variant === 'full' && (
+      <span class="flex flex-col leading-none">
+        <span class="font-display text-lg font-extrabold tracking-tight" style={`color:${wordmarkColor}`}>
+          Grupo <span class="text-brand-500">CGR</span>
+        </span>
+        <span
+          class:list={[
+            'text-[0.6rem] font-semibold tracking-[0.18em] uppercase',
+            theme === 'dark' ? 'text-ink-500' : 'text-white/70'
+          ]}
+        >
+          Servicios para la construcción
+        </span>
+      </span>
+    )
+  }
+</a>

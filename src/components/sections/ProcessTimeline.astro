@@ -1,0 +1,47 @@
+---
+import { MessageCircle, ClipboardCheck, FileText, HardHat, CircleCheckBig } from '@lucide/astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { PROCESS_STEPS } from '../../data/process';
+
+const icons = {
+  'message-circle': MessageCircle,
+  'clipboard-check': ClipboardCheck,
+  'file-text': FileText,
+  'hard-hat': HardHat,
+  'check-circle-2': CircleCheckBig
+};
+---
+
+<section class="container-page py-24 sm:py-32">
+  <SectionHeading
+    eyebrow="Cómo Trabajamos"
+    title="Un proceso claro, de principio a fin."
+    description="Sin sorpresas ni pasos ocultos. Así es cada proyecto que emprendemos junto a nuestros clientes."
+  />
+
+  <ol class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+    {
+      PROCESS_STEPS.map((item, index) => {
+        const Icon = icons[item.icon];
+        return (
+          <li class="reveal relative" data-reveal-delay={index * 0.08}>
+            <div class="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-0">
+              <div class="bg-ink-950 inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-white">
+                <Icon class="size-6" aria-hidden="true" />
+              </div>
+              <span class="text-brand-700 text-sm font-semibold lg:mt-4">Paso {item.step}</span>
+            </div>
+            <h3 class="text-ink-950 mt-3 text-lg font-semibold">{item.title}</h3>
+            <p class="text-ink-500 mt-2 text-sm leading-relaxed">{item.description}</p>
+            {index < PROCESS_STEPS.length - 1 && (
+              <div
+                class="from-ink-200 mt-6 hidden h-px w-full bg-gradient-to-r to-transparent lg:block"
+                aria-hidden="true"
+              />
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>

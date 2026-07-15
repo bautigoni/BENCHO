@@ -1,0 +1,16 @@
+---
+import { MessageCircle } from '@lucide/astro';
+import { DEFAULT_WHATSAPP_HREF } from '../lib/whatsapp';
+---
+
+<a
+  href={DEFAULT_WHATSAPP_HREF}
+  data-whatsapp-cta
+  data-cta-location="floating_button"
+  data-track="cta_click"
+  aria-label="Solicitar presupuesto por WhatsApp"
+  class="fixed right-5 bottom-5 z-40 inline-flex size-15 items-center justify-center rounded-full bg-[#0f7a3d] text-white shadow-lg shadow-black/20 transition-transform hover:scale-105 focus-visible:ring-offset-white sm:right-8 sm:bottom-8"
+>
+  <MessageCircle class="size-7" fill="currentColor" stroke="white" aria-hidden="true" />
+  <span class="sr-only">Solicitar presupuesto por WhatsApp</span>
+</a>

@@ -1,0 +1,14 @@
+{
+  "name": "Grupo CGR — Servicios para la Construcción",
+  "short_name": "Grupo CGR",
+  "description": "Empresa familiar con más de 18 años de trayectoria en pintura, revestimientos, microcemento y remodelaciones integrales.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f9640f",
+  "lang": "es-AR",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

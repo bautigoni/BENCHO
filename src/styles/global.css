@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-brand-50: #fff6ed;
+  --color-brand-100: #ffead4;
+  --color-brand-200: #ffd1a8;
+  --color-brand-300: #ffb071;
+  --color-brand-400: #ff8638;
+  --color-brand-500: #f9640f;
+  --color-brand-600: #ea4c05;
+  --color-brand-700: #c23807;
+  --color-brand-800: #9a2d0e;
+  --color-brand-900: #7c280f;
+  --color-brand-950: #431105;
+
+  --color-ink-50: #f6f6f7;
+  --color-ink-100: #e2e3e5;
+  --color-ink-200: #c5c6cb;
+  --color-ink-300: #a1a3aa;
+  --color-ink-400: #7c7e87;
+  --color-ink-500: #61636c;
+  --color-ink-600: #4c4e56;
+  --color-ink-700: #3d3e44;
+  --color-ink-800: #2a2b30;
+  --color-ink-900: #18191c;
+  --color-ink-950: #0c0c0e;
+
+  --container-8xl: 96rem;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-hero-zoom: hero-zoom 12s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-underline: underline-grow 0.3s ease-out forwards;
+  --animate-scan-glow: scan-glow 5s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes underline-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes scan-glow {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(500%);
+    }
+  }
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply text-ink-800 bg-white font-sans antialiased;
+    font-feature-settings:
+      'ss01' 1,
+      'cv01' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink-950 tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-brand-500/90 text-ink-950;
+  }
+
+  :focus-visible {
+    @apply ring-brand-600 ring-2 ring-offset-2 ring-offset-white outline-none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply max-w-8xl mx-auto w-full px-6 sm:px-8 lg:px-12;
+  }
+
+  /* Content only hides for scroll-reveal when client JS confirmed it can run
+     (see the early `document.documentElement.classList.add('js')` in
+     BaseLayout). Without JS, .reveal content stays fully visible. */
+  .js .reveal {
+    opacity: 0;
+  }
+
+  .js .reveal.is-visible {
+    animation: var(--animate-fade-up);
+    animation-delay: var(--reveal-delay, 0s);
+  }
+}

@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, CirclePlay } from '@lucide/astro';
+import heroImage from '../../assets/images/proyectos/nordelta-hero.jpg';
+import { SITE } from '../../consts';
+import { DEFAULT_WHATSAPP_HREF } from '../../lib/whatsapp';
+---
+
+<section class="bg-ink-950 relative isolate flex min-h-[92vh] items-end overflow-hidden sm:min-h-[88vh]">
+  <Image
+    src={heroImage}
+    alt="Vivienda moderna con fachada blanca y revestimiento de madera, un proyecto de Grupo CGR"
+    class="animate-hero-zoom absolute inset-0 size-full object-cover"
+    widths={[640, 828]}
+    sizes="100vw"
+    quality={95}
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="from-ink-950 via-ink-950/55 to-ink-950/10 absolute inset-0 bg-gradient-to-t" aria-hidden="true">
+  </div>
+  <div
+    class="from-ink-950/70 absolute inset-0 bg-gradient-to-r via-transparent to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page relative py-20 sm:py-24">
+    <p
+      class="animate-fade-up text-brand-400 inline-flex items-center gap-2 text-sm font-semibold tracking-[0.2em] uppercase"
+      style="animation-delay:.05s"
+    >
+      <span class="bg-brand-400 relative flex size-2 rounded-full" aria-hidden="true">
+        <span class="bg-brand-400 animate-pulse-glow absolute inline-flex size-full rounded-full"></span>
+      </span>
+      {SITE.name} &mdash; Desde {SITE.foundingYear}
+    </p>
+    <h1
+      class="animate-fade-up mt-5 max-w-3xl text-4xl font-bold text-balance text-white sm:text-6xl lg:text-7xl"
+      style="animation-delay:.15s"
+    >
+      Construimos confianza en cada proyecto que tocamos.
+    </h1>
+    <p
+      class="animate-fade-up mt-6 max-w-xl text-lg text-pretty text-white/80 sm:text-xl"
+      style="animation-delay:.28s"
+    >
+      Más de {SITE.yearsOfExperience} años transformando fachadas, superficies y espacios completos para familias,
+      arquitectos y desarrolladores en todo Buenos Aires.
+    </p>
+
+    <div class="animate-fade-up mt-10 flex flex-col gap-4 sm:flex-row" style="animation-delay:.4s">
+      <a
+        href={DEFAULT_WHATSAPP_HREF}
+        data-whatsapp-cta
+        data-cta-location="hero"
+        data-track="cta_click"
+        class="group bg-brand-500 hover:bg-brand-600 text-ink-950 inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30"
+      >
+        Solicitar Presupuesto
+        <ArrowRight class="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      </a>
+      <a
+        href="/servicios"
+        class="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10"
+      >
+        <CirclePlay class="size-4.5 transition-transform group-hover:scale-110" aria-hidden="true" />
+        Ver Servicios
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-6 hidden animate-bounce justify-center sm:flex" aria-hidden="true">
+    <span class="flex h-9 w-6 items-start justify-center rounded-full border-2 border-white/40 p-1">
+      <span class="h-2 w-1 rounded-full bg-white/70"></span>
+    </span>
+  </div>
+</section>

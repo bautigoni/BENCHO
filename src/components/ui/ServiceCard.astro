@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, PaintRoller, Layers, Building2, SquareStack, RefreshCcw, Hammer } from '@lucide/astro';
+import type { Service } from '../../data/services';
+
+const icons = {
+  'paint-roller': PaintRoller,
+  layers: Layers,
+  'building-2': Building2,
+  'square-stack': SquareStack,
+  'refresh-ccw': RefreshCcw,
+  hammer: Hammer
+};
+
+interface Props {
+  service: Service;
+  revealDelay?: number;
+}
+
+const { service, revealDelay = 0 } = Astro.props;
+const Icon = icons[service.icon];
+---
+
+<a
+  href={`/servicios/${service.slug}`}
+  data-track="service_click"
+  data-service={service.slug}
+  class="reveal group border-ink-100 shadow-ink-950/[0.03] hover:shadow-ink-950/[0.08] flex flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+  data-reveal-delay={revealDelay}
+>
+  <div class="relative aspect-4/3 overflow-hidden">
+    <Image
+      src={service.image}
+      alt={service.imageAlt}
+      class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+      widths={[400, 640, 800]}
+      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      loading="lazy"
+    />
+    <div class="from-ink-950/50 absolute inset-0 bg-gradient-to-t to-transparent" aria-hidden="true"></div>
+    <div
+      class="absolute top-4 left-4 inline-flex size-11 items-center justify-center rounded-xl bg-white/95 backdrop-blur-sm"
+    >
+      <Icon class="text-brand-700 size-5" aria-hidden="true" />
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="text-ink-950 text-xl font-semibold">{service.title}</h3>
+    <p class="text-ink-500 mt-2 flex-1 text-sm leading-relaxed">{service.tagline}</p>
+    <span class="text-brand-700 mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
+      Ver más
+      <ArrowRight class="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+    </span>
+  </div>
+</a>

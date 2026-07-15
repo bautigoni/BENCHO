@@ -1,0 +1,35 @@
+---
+import { Award, Users, Handshake, ShieldCheck } from '@lucide/astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { VALUE_PROPS } from '../../data/why-choose-us';
+
+const icons = { award: Award, users: Users, handshake: Handshake, 'shield-check': ShieldCheck };
+---
+
+<section class="container-page py-24 sm:py-32">
+  <SectionHeading
+    eyebrow="Por qué elegirnos"
+    title="La experiencia de una empresa familiar, con estándares de una gran constructora."
+    description="Cada proyecto que asumimos lleva nuestro apellido. Por eso trabajamos con la misma exigencia, sea una obra chica o un desarrollo completo."
+  />
+
+  <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      VALUE_PROPS.map((value, index) => {
+        const Icon = icons[value.icon];
+        return (
+          <div
+            class="reveal border-ink-100 shadow-ink-950/[0.03] hover:shadow-ink-950/[0.06] rounded-3xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-lg"
+            data-reveal-delay={index * 0.08}
+          >
+            <div class="bg-brand-50 inline-flex size-12 items-center justify-center rounded-2xl">
+              <Icon class="text-brand-700 size-6" aria-hidden="true" />
+            </div>
+            <h3 class="text-ink-950 mt-5 text-lg font-semibold">{value.title}</h3>
+            <p class="text-ink-500 mt-2.5 text-sm leading-relaxed">{value.description}</p>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>

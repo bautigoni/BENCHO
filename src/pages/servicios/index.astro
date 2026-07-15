@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import ServiceCard from '../../components/ui/ServiceCard.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { SERVICES } from '../../data/services';
+import { SITE } from '../../consts';
+---
+
+<BaseLayout
+  title="Servicios"
+  description={`Pintura, revestimientos texturados, estuco, microcemento, renovaciones y remodelaciones. Conocé todos los servicios de construcción de ${SITE.name}.`}
+>
+  <PageHero
+    eyebrow="Servicios"
+    title="Un servicio para cada etapa de tu proyecto."
+    description="Trabajamos con homeowners, arquitectos, desarrolladores y empresas ofreciendo soluciones puntuales o integrales, siempre con el mismo estándar de calidad."
+    breadcrumbItems={[{ name: 'Servicios', url: '/servicios' }]}
+  />
+
+  <section class="container-page py-24 sm:py-32">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {SERVICES.map((service, index) => <ServiceCard service={service} revealDelay={(index % 3) * 0.08} />)}
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>

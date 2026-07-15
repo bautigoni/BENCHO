@@ -1,0 +1,23 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { TIMELINE } from '../../data/timeline';
+---
+
+<section class="container-page py-24 sm:py-32">
+  <SectionHeading eyebrow="Nuestro Camino" title="18 años de crecimiento, obra a obra." />
+
+  <ol class="border-ink-200 relative mt-16 space-y-10 border-s ps-8 sm:ps-10">
+    {
+      TIMELINE.map((milestone, index) => (
+        <li class="reveal relative" data-reveal-delay={index * 0.06}>
+          <span class="bg-brand-500 text-ink-950 absolute -start-[2.55rem] top-1 flex size-8 items-center justify-center rounded-full text-xs font-bold sm:-start-[3.05rem]">
+            {index + 1}
+          </span>
+          <p class="text-brand-700 text-sm font-semibold tracking-wide uppercase">{milestone.year}</p>
+          <h3 class="text-ink-950 mt-1.5 text-xl font-semibold">{milestone.title}</h3>
+          <p class="text-ink-500 mt-2 max-w-2xl">{milestone.description}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

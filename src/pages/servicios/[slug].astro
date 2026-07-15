@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import { CircleCheckBig, Briefcase, ArrowRight } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import ServiceCard from '../../components/ui/ServiceCard.astro';
+import Button from '../../components/ui/Button.astro';
+import { SERVICES } from '../../data/services';
+import { SITE } from '../../consts';
+
+export function getStaticPaths() {
+  return SERVICES.map((service) => ({
+    params: { slug: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+const relatedServices = SERVICES.filter((item) => item.slug !== service.slug).slice(0, 3);
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: service.title,
+  name: `${service.title} | ${SITE.name}`,
+  description: service.description[0],
+  provider: { '@id': `${SITE.url}/#organization` },
+  areaServed: 'Buenos Aires, Argentina'
+};
+---
+
+<BaseLayout title={service.title} description={service.tagline} ogImage="/og-image.jpg">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <PageHero
+    eyebrow="Servicios"
+    title={service.title}
+    description={service.tagline}
+    breadcrumbItems={[
+      { name: 'Servicios', url: '/servicios' },
+      { name: service.title, url: `/servicios/${service.slug}` }
+    ]}
+  />
+
+  <section class="container-page py-20 sm:py-28">
+    <div class="grid gap-14 lg:grid-cols-2 lg:gap-20">
+      <div class="reveal overflow-hidden rounded-3xl">
+        <Image
+          src={service.image}
+          alt={service.imageAlt}
+          class="aspect-4/5 w-full object-cover"
+          widths={[400, 640, 900]}
+          sizes="(min-width: 1024px) 40vw, 90vw"
+          loading="eager"
+        />
+      </div>
+
+      <div class="reveal">
+        <div class="text-ink-600 space-y-5 text-lg leading-relaxed">
+          {service.description.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <div class="mt-10">
+          <h2 class="text-brand-700 text-sm font-semibold tracking-wide uppercase">Beneficios</h2>
+          <ul class="mt-4 space-y-3">
+            {
+              service.benefits.map((benefit) => (
+                <li class="flex items-start gap-3">
+                  <CircleCheckBig class="text-brand-700 mt-0.5 size-5 shrink-0" aria-hidden="true" />
+                  <span class="text-ink-700">{benefit}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="mt-10">
+          <h2 class="text-brand-700 text-sm font-semibold tracking-wide uppercase">Aplicaciones</h2>
+          <ul class="mt-4 space-y-3">
+            {
+              service.applications.map((application) => (
+                <li class="flex items-start gap-3">
+                  <Briefcase class="text-ink-400 mt-0.5 size-5 shrink-0" aria-hidden="true" />
+                  <span class="text-ink-700">{application}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="mt-10">
+          <Button whatsapp ctaLocation={`service_${service.slug}`} size="lg" showArrow
+            >Solicitar Presupuesto de {service.title}</Button
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-ink-100 bg-ink-50/60 border-t py-24 sm:py-32">
+    <div class="container-page">
+      <div class="reveal flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-3xl font-bold sm:text-4xl">Otros servicios que te pueden interesar</h2>
+        <a href="/servicios" class="text-brand-700 inline-flex items-center gap-1.5 text-sm font-semibold">
+          Ver todos los servicios
+          <ArrowRight class="size-4" aria-hidden="true" />
+        </a>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          relatedServices.map((related, index) => (
+            <ServiceCard service={related} revealDelay={index * 0.08} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

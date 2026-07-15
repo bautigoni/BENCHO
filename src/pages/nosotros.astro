@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import AboutStory from '../components/sections/AboutStory.astro';
+import MissionVisionValues from '../components/sections/MissionVisionValues.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout
+  title="Nosotros"
+  description={`Conocé la historia de ${SITE.name}, empresa familiar con más de ${SITE.yearsOfExperience} años de trayectoria en la construcción en Buenos Aires.`}
+>
+  <PageHero
+    eyebrow="Nosotros"
+    title="18 años construyendo con el mismo compromiso del primer día."
+    description="Somos una empresa familiar que transformó la pasión por el trabajo bien hecho en una constructora de confianza."
+    breadcrumbItems={[{ name: 'Nosotros', url: '/nosotros' }]}
+  />
+  <AboutStory />
+  <MissionVisionValues />
+  <Timeline />
+  <FinalCta />
+</BaseLayout>

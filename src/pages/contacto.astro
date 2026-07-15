@@ -1,0 +1,113 @@
+---
+import { MessageCircle, MapPin, Clock } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
+import FacebookIcon from '../components/icons/FacebookIcon.astro';
+import { SITE, CONTACT, SOCIAL_LINKS } from '../consts';
+import { DEFAULT_WHATSAPP_HREF } from '../lib/whatsapp';
+
+const socialIcons = { instagram: InstagramIcon, facebook: FacebookIcon };
+
+const infoCards = [
+  {
+    icon: Clock,
+    title: 'Tiempo de respuesta',
+    description:
+      'Respondemos la mayoría de las consultas por WhatsApp dentro de las primeras horas del día hábil.'
+  },
+  {
+    icon: MapPin,
+    title: 'Zona de cobertura',
+    description: CONTACT.areaServed
+  }
+];
+---
+
+<BaseLayout
+  title="Contacto"
+  description={`Solicitá tu presupuesto por WhatsApp. ${SITE.name} responde rápido y sin compromiso.`}
+>
+  <PageHero
+    eyebrow="Contacto"
+    title="Hablemos de tu proyecto."
+    description="La forma más rápida de recibir un presupuesto es escribirnos directamente por WhatsApp. Contanos qué necesitás y te respondemos a la brevedad."
+    breadcrumbItems={[{ name: 'Contacto', url: '/contacto' }]}
+  />
+
+  <section class="container-page py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl text-center">
+      <div
+        class="reveal mx-auto inline-flex size-20 items-center justify-center rounded-full bg-[#0f7a3d]/10"
+      >
+        <MessageCircle class="size-9 text-[#0f7a3d]" aria-hidden="true" />
+      </div>
+      <h2 class="reveal mt-6 text-3xl font-bold text-balance sm:text-4xl">Solicitá tu presupuesto ahora</h2>
+      <p class="reveal text-ink-500 mt-4 text-lg text-pretty">
+        Un clic te conecta directo con nuestro equipo. Sin formularios, sin esperas.
+      </p>
+      <div class="reveal mt-8">
+        <a
+          href={DEFAULT_WHATSAPP_HREF}
+          data-whatsapp-cta
+          data-cta-location="contact_page"
+          data-track="cta_click"
+          class="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#0f7a3d] px-8 py-4 text-lg font-semibold text-white transition-transform hover:scale-[1.03]"
+        >
+          <MessageCircle class="size-5" fill="currentColor" stroke="white" aria-hidden="true" />
+          Escribinos por WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-20 grid gap-6 sm:grid-cols-2">
+      {
+        infoCards.map((card, index) => (
+          <div
+            class="reveal border-ink-100 shadow-ink-950/[0.03] rounded-3xl border bg-white p-8 shadow-sm"
+            data-reveal-delay={index * 0.08}
+          >
+            <div class="bg-brand-50 inline-flex size-12 items-center justify-center rounded-2xl">
+              <card.icon class="text-brand-700 size-6" aria-hidden="true" />
+            </div>
+            <h3 class="text-ink-950 mt-5 text-lg font-semibold">{card.title}</h3>
+            <p class="text-ink-500 mt-2.5 text-sm leading-relaxed">{card.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="reveal border-ink-100 shadow-ink-950/[0.03] mt-6 rounded-3xl border bg-white p-8 shadow-sm sm:p-10"
+    >
+      <h3 class="text-ink-950 text-lg font-semibold">Seguinos en redes</h3>
+      <p class="text-ink-500 mt-2 text-sm">
+        Mirá nuestros últimos proyectos terminados y el trabajo del día a día.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        {
+          SOCIAL_LINKS.map((social) => {
+            const Icon = socialIcons[social.icon];
+            return (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-ink-200 text-ink-700 hover:border-ink-950 hover:text-ink-950 inline-flex items-center gap-2.5 rounded-full border px-5 py-3 text-sm font-medium transition-colors"
+              >
+                <Icon class="size-4.5" aria-hidden="true" />
+                {social.handle}
+              </a>
+            );
+          })
+        }
+        <a
+          href={`mailto:${CONTACT.email}`}
+          class="border-ink-200 text-ink-700 hover:border-ink-950 hover:text-ink-950 inline-flex items-center gap-2.5 rounded-full border px-5 py-3 text-sm font-medium transition-colors"
+        >
+          {CONTACT.email}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
+import FeaturedServices from '../components/sections/FeaturedServices.astro';
+import ProcessTimeline from '../components/sections/ProcessTimeline.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout title={SITE.name} description={SITE.description}>
+  <Hero />
+  <WhyChooseUs />
+  <FeaturedServices />
+  <ProcessTimeline />
+  <Testimonials />
+  <Gallery />
+  <FinalCta />
+</BaseLayout>

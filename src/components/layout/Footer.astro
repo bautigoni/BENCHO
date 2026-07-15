@@ -1,0 +1,100 @@
+---
+import { MapPin, Mail, Phone } from '@lucide/astro';
+import Logo from '../Logo.astro';
+import InstagramIcon from '../icons/InstagramIcon.astro';
+import FacebookIcon from '../icons/FacebookIcon.astro';
+import { NAV_LINKS, SOCIAL_LINKS, CONTACT, SITE, WHATSAPP_CONTACTS } from '../../consts';
+import { SERVICES } from '../../data/services';
+
+const socialIcons = { instagram: InstagramIcon, facebook: FacebookIcon };
+const year = new Date().getFullYear();
+---
+
+<footer class="border-ink-100 bg-ink-950 text-ink-300 border-t">
+  <div class="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+    <div class="flex flex-col gap-4 lg:col-span-1">
+      <Logo theme="light" />
+      <p class="text-ink-400 max-w-xs text-sm leading-relaxed">
+        Empresa familiar con más de {SITE.yearsOfExperience} años construyendo confianza, un proyecto a la vez.
+      </p>
+      <div class="flex items-center gap-3 pt-2">
+        {
+          SOCIAL_LINKS.map((social) => {
+            const Icon = socialIcons[social.icon];
+            return (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${SITE.name} en ${social.label}`}
+                class="hover:bg-brand-600 inline-flex size-10 items-center justify-center rounded-full bg-white/5 text-white transition-colors"
+              >
+                <Icon class="size-4.5" aria-hidden="true" />
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <nav aria-label="Navegación del pie de página">
+      <h2 class="text-sm font-semibold text-white">Navegación</h2>
+      <ul class="mt-4 space-y-3">
+        {
+          NAV_LINKS.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm transition-colors hover:text-white">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <nav aria-label="Servicios">
+      <h2 class="text-sm font-semibold text-white">Servicios</h2>
+      <ul class="mt-4 space-y-3">
+        {
+          SERVICES.map((service) => (
+            <li>
+              <a href={`/servicios/${service.slug}`} class="text-sm transition-colors hover:text-white">
+                {service.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-sm font-semibold text-white">Contacto</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        <li class="flex items-start gap-2.5">
+          <Phone class="text-brand-500 mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <span>
+            {WHATSAPP_CONTACTS[0].name}: {WHATSAPP_CONTACTS[0].phoneDisplay}<br />
+            {WHATSAPP_CONTACTS[1].name}: {WHATSAPP_CONTACTS[1].phoneDisplay}
+          </span>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <Mail class="text-brand-500 size-4 shrink-0" aria-hidden="true" />
+          <a href={`mailto:${CONTACT.email}`} class="transition-colors hover:text-white">{CONTACT.email}</a>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <MapPin class="text-brand-500 size-4 shrink-0" aria-hidden="true" />
+          <span>{CONTACT.areaServed}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="container-page text-ink-500 flex flex-col items-center justify-between gap-3 py-6 text-xs sm:flex-row"
+    >
+      <p>&copy; {year} {SITE.legalName}. Todos los derechos reservados.</p>
+      <p>Hecho con dedicación en Buenos Aires, Argentina.</p>
+    </div>
+  </div>
+</footer>

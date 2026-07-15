@@ -1,0 +1,67 @@
+---
+import { Target, Eye, Sparkles } from '@lucide/astro';
+import { SITE } from '../../consts';
+
+const pillars = [
+  {
+    icon: Target,
+    title: 'Misión',
+    description:
+      'Brindar soluciones de construcción y terminación de calidad superior, con procesos transparentes y un trato cercano que genere confianza real en cada cliente.'
+  },
+  {
+    icon: Eye,
+    title: 'Visión',
+    description:
+      'Ser la constructora que cada cliente elige y recomienda para llevar adelante sus proyectos, reconocida por su compromiso, transparencia y calidad sostenida en el tiempo.'
+  },
+  {
+    icon: Sparkles,
+    title: 'Filosofía',
+    description: `Cada obra es una oportunidad de demostrar por qué ${SITE.name} lleva más de ${SITE.yearsOfExperience} años construyendo relaciones, no solo paredes.`
+  }
+];
+
+const values = [
+  'Compromiso',
+  'Transparencia',
+  'Calidad',
+  'Confianza',
+  'Responsabilidad',
+  'Optimización de recursos'
+];
+---
+
+<section class="bg-ink-50/60 py-24 sm:py-32">
+  <div class="container-page">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        pillars.map((pillar, index) => (
+          <div
+            class="reveal border-ink-100 shadow-ink-950/[0.03] rounded-3xl border bg-white p-8 shadow-sm"
+            data-reveal-delay={index * 0.1}
+          >
+            <div class="bg-brand-50 inline-flex size-12 items-center justify-center rounded-2xl">
+              <pillar.icon class="text-brand-700 size-6" aria-hidden="true" />
+            </div>
+            <h3 class="text-ink-950 mt-5 text-xl font-semibold">{pillar.title}</h3>
+            <p class="text-ink-500 mt-2.5 text-sm leading-relaxed">{pillar.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-16 text-center">
+      <p class="text-brand-700 text-sm font-semibold tracking-wide uppercase">Nuestros Valores</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        {
+          values.map((value) => (
+            <span class="border-ink-200 text-ink-700 rounded-full border bg-white px-5 py-2.5 text-sm font-medium">
+              {value}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

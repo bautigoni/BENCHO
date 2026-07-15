@@ -1,0 +1,59 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import { DEFAULT_WHATSAPP_HREF } from '../../lib/whatsapp';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'dark' | 'outline' | 'ghost';
+  size?: 'md' | 'lg';
+  whatsapp?: boolean;
+  ctaLocation?: string;
+  showArrow?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  whatsapp = false,
+  ctaLocation,
+  showArrow = false,
+  class: className = ''
+} = Astro.props;
+
+const resolvedHref = whatsapp ? DEFAULT_WHATSAPP_HREF : (href ?? '#');
+
+const variants = {
+  primary:
+    'bg-brand-500 text-ink-950 hover:bg-brand-600 shadow-md shadow-brand-950/10 hover:shadow-lg hover:shadow-brand-950/15',
+  dark: 'bg-ink-950 text-white hover:bg-ink-800 shadow-md shadow-ink-950/10 hover:shadow-lg',
+  outline: 'border border-ink-200 text-ink-800 hover:border-ink-950 hover:bg-ink-50',
+  ghost: 'text-ink-800 hover:bg-ink-100'
+};
+
+const sizes = {
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-7 py-4 text-base'
+};
+---
+
+<a
+  href={resolvedHref}
+  data-whatsapp-cta={whatsapp ? true : undefined}
+  data-cta-location={ctaLocation}
+  data-track={ctaLocation ? 'cta_click' : undefined}
+  class:list={[
+    'group inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+    variants[variant],
+    sizes[size],
+    className
+  ]}
+>
+  <slot />
+  {
+    showArrow && (
+      <ArrowRight class="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+    )
+  }
+</a>
