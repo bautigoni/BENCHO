@@ -1,78 +1,53 @@
 ---
 import { Image } from 'astro:assets';
-import { ArrowRight, CirclePlay } from '@lucide/astro';
-import heroImage from '../../assets/images/proyectos/nordelta-hero.jpg';
-import { SITE } from '../../consts';
+import { ArrowRight } from '@lucide/astro';
+import heroImage from '../../assets/images/proyectos/hero-casa-pileta.png';
+import Logo from '../Logo.astro';
 import { DEFAULT_WHATSAPP_HREF } from '../../lib/whatsapp';
 ---
 
-<section class="bg-ink-950 relative isolate flex min-h-[92vh] items-end overflow-hidden sm:min-h-[88vh]">
+<section data-top-brand class="bg-surface-dark relative isolate min-h-[100dvh] overflow-hidden">
   <Image
     src={heroImage}
-    alt="Vivienda moderna con fachada blanca y revestimiento de madera, un proyecto de Grupo CGR"
-    class="animate-hero-zoom absolute inset-0 size-full object-cover"
-    widths={[640, 828]}
+    alt="Casa de fachada blanca junto a una pileta, intervenida por Grupo CGR"
+    class="absolute inset-0 size-full object-cover object-[58%_center] sm:object-[55%_center]"
+    widths={[640, 828, 1200, 1600]}
     sizes="100vw"
-    quality={95}
+    quality={100}
     loading="eager"
     fetchpriority="high"
   />
-  <div class="from-ink-950 via-ink-950/55 to-ink-950/10 absolute inset-0 bg-gradient-to-t" aria-hidden="true">
-  </div>
+
   <div
-    class="from-ink-950/70 absolute inset-0 bg-gradient-to-r via-transparent to-transparent"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_12%_76%,rgba(31,31,33,0.62)_0%,rgba(31,31,33,0.28)_34%,transparent_62%),linear-gradient(180deg,rgba(31,31,33,0.16)_0%,transparent_30%)]"
     aria-hidden="true"
   >
   </div>
 
-  <div class="container-page relative py-20 sm:py-24">
-    <p
-      class="animate-fade-up text-brand-400 inline-flex items-center gap-2 text-sm font-semibold tracking-[0.2em] uppercase"
-      style="animation-delay:.05s"
-    >
-      <span class="bg-brand-400 relative flex size-2 rounded-full" aria-hidden="true">
-        <span class="bg-brand-400 animate-pulse-glow absolute inline-flex size-full rounded-full"></span>
-      </span>
-      {SITE.name} &mdash; Desde {SITE.foundingYear}
-    </p>
-    <h1
-      class="animate-fade-up mt-5 max-w-3xl text-4xl font-bold text-balance text-white sm:text-6xl lg:text-7xl"
-      style="animation-delay:.15s"
-    >
-      Construimos confianza en cada proyecto que tocamos.
-    </h1>
-    <p
-      class="animate-fade-up mt-6 max-w-xl text-lg text-pretty text-white/80 sm:text-xl"
-      style="animation-delay:.28s"
-    >
-      Más de {SITE.yearsOfExperience} años transformando fachadas, superficies y espacios completos para familias,
-      arquitectos y desarrolladores en todo Buenos Aires.
-    </p>
+  <div class="container-page relative z-10 flex min-h-[100dvh] flex-col pt-6 pb-10 sm:pt-8 sm:pb-12">
+    <Logo theme="light" />
 
-    <div class="animate-fade-up mt-10 flex flex-col gap-4 sm:flex-row" style="animation-delay:.4s">
+    <div class="mt-auto max-w-lg">
+      <h1
+        class="max-w-[8ch] text-[clamp(2.8rem,7.8vw,5.7rem)] leading-[0.9] font-semibold tracking-[-0.065em] text-balance text-white"
+      >
+        Construimos <span class="text-brand-500">confianza.</span>
+      </h1>
+
+      <p class="mt-5 max-w-sm text-base leading-relaxed text-pretty text-white/86 sm:text-lg">
+        Obras prolijas, plazos claros y atención directa.
+      </p>
+
       <a
         href={DEFAULT_WHATSAPP_HREF}
         data-whatsapp-cta
         data-cta-location="hero"
         data-track="cta_click"
-        class="group bg-brand-500 hover:bg-brand-600 text-ink-950 inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30"
+        class="group bg-brand-500 hover:bg-brand-600 text-ink-950 mt-7 inline-flex w-fit items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold transition-all hover:-translate-y-0.5 active:translate-y-px"
       >
         Solicitar Presupuesto
         <ArrowRight class="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
       </a>
-      <a
-        href="/servicios"
-        class="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10"
-      >
-        <CirclePlay class="size-4.5 transition-transform group-hover:scale-110" aria-hidden="true" />
-        Ver Servicios
-      </a>
     </div>
-  </div>
-
-  <div class="absolute inset-x-0 bottom-6 hidden animate-bounce justify-center sm:flex" aria-hidden="true">
-    <span class="flex h-9 w-6 items-start justify-center rounded-full border-2 border-white/40 p-1">
-      <span class="h-2 w-1 rounded-full bg-white/70"></span>
-    </span>
   </div>
 </section>

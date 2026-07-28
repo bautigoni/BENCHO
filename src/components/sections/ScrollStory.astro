@@ -1,0 +1,62 @@
+---
+import { getImage } from 'astro:assets';
+import nordeltaImage from '../../assets/images/proyectos/nordelta.jpeg';
+import garageImage from '../../assets/images/proyectos/garage-5.jpeg';
+import fincasImage from '../../assets/images/proyectos/fincas-del-lago-1.jpeg';
+import ScrollStoryStack, { type ScrollStoryStage } from '../react/ScrollStoryStack';
+
+const stageContent = [
+  {
+    title: 'Relevamiento',
+    description: 'Entendemos el espacio, sus usos y cada superficie antes de presupuestar.',
+    image: nordeltaImage,
+    imageAlt: 'Vivienda moderna terminada por Grupo CGR en Nordelta'
+  },
+  {
+    title: 'Ejecución',
+    description: 'Protegemos, preparamos y trabajamos por etapas para cuidar cada detalle.',
+    image: garageImage,
+    imageAlt: 'Garage en proceso de remodelación integral por Grupo CGR'
+  },
+  {
+    title: 'Entrega',
+    description: 'Revisamos el resultado junto al cliente y cerramos la obra sin pendientes.',
+    image: fincasImage,
+    imageAlt: 'Proyecto residencial finalizado por Grupo CGR en Fincas del Lago'
+  }
+];
+
+const stages: ScrollStoryStage[] = await Promise.all(
+  stageContent.map(async (stage) => {
+    const image = await getImage({ src: stage.image, width: 1600, format: 'webp' });
+    return {
+      title: stage.title,
+      description: stage.description,
+      imageSrc: image.src,
+      imageAlt: stage.imageAlt,
+      width: image.attributes.width as number,
+      height: image.attributes.height as number
+    };
+  })
+);
+---
+
+<section
+  class="scroll-story overflow-clip bg-[#ececed] pt-24 sm:pt-32"
+  aria-label="Nuestro proceso de trabajo"
+>
+  <div class="container-page">
+    <div class="max-w-3xl">
+      <h2
+        class="text-ink-950 max-w-[13ch] text-[clamp(2.8rem,7vw,6.2rem)] leading-[0.92] font-semibold tracking-[-0.065em] text-balance"
+      >
+        La obra cambia frente a vos.
+      </h2>
+      <p class="text-ink-600 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
+        Tres momentos. Un mismo estándar de trabajo.
+      </p>
+    </div>
+
+    <ScrollStoryStack stages={stages} client:load />
+  </div>
+</section>

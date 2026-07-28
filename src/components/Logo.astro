@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { variant = 'full', theme = 'dark', class: className = '' } = Astro.props;
-const wordmarkColor = theme === 'dark' ? '#0c0c0e' : '#ffffff';
+const wordmarkColor = theme === 'dark' ? '#919193' : '#f2f2f3';
 ---
 
 <a
@@ -27,13 +27,16 @@ const wordmarkColor = theme === 'dark' ? '#0c0c0e' : '#ffffff';
   {
     variant === 'full' && (
       <span class="flex flex-col leading-none">
-        <span class="font-display text-lg font-extrabold tracking-tight" style={`color:${wordmarkColor}`}>
-          Grupo <span class="text-brand-500">CGR</span>
+        <span
+          class="font-sans text-[1.05rem] font-medium tracking-[0.12em] uppercase"
+          style={`color:${wordmarkColor}`}
+        >
+          Grupo CGR
         </span>
         <span
           class:list={[
-            'text-[0.6rem] font-semibold tracking-[0.18em] uppercase',
-            theme === 'dark' ? 'text-ink-500' : 'text-white/70'
+            'mt-1 text-[0.52rem] font-normal tracking-[0.2em]',
+            theme === 'dark' ? 'text-logo-gray' : 'text-white/65'
           ]}
         >
           Servicios para la construcción

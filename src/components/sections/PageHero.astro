@@ -1,24 +1,77 @@
 ---
-import Breadcrumbs from '../Breadcrumbs.astro';
-import type { BreadcrumbItem } from '../../lib/schema';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   eyebrow?: string;
   title: string;
   description?: string;
-  breadcrumbItems: BreadcrumbItem[];
+  image?: ImageMetadata;
+  imageAlt?: string;
 }
 
-const { eyebrow, title, description, breadcrumbItems } = Astro.props;
+const { eyebrow, title, description, image, imageAlt = '' } = Astro.props;
 ---
 
-<section class="border-ink-100 bg-ink-950 border-b">
-  <div class="[&_a]:text-white/60 [&_a:hover]:text-white [&_span]:text-white [&_svg]:text-white/30">
-    <Breadcrumbs items={breadcrumbItems} />
+<section
+  data-parallax-root
+  data-top-brand
+  class="relative overflow-hidden border-b border-[#ded8cf] bg-[#f5f1eb]"
+  style="--parallax-y: 0px"
+>
+  <div class="bg-ink-950/[0.05] pointer-events-none absolute inset-y-0 right-[12%] hidden w-px lg:block">
   </div>
-  <div class="container-page pt-4 pb-16 sm:pb-20">
-    {eyebrow && <p class="text-brand-400 text-sm font-semibold tracking-[0.2em] uppercase">{eyebrow}</p>}
-    <h1 class="mt-4 max-w-3xl text-4xl font-bold text-balance text-white sm:text-5xl lg:text-6xl">{title}</h1>
-    {description && <p class="mt-5 max-w-2xl text-lg text-pretty text-white/70">{description}</p>}
+
+  <div class="container-page relative pt-32 pb-18 sm:pt-36 sm:pb-24">
+    <div
+      class:list={[
+        'grid items-end gap-10 lg:gap-16',
+        image ? 'lg:grid-cols-[0.9fr_1.1fr]' : 'lg:grid-cols-[1.15fr_0.85fr]'
+      ]}
+    >
+      <div class="relative z-10">
+        {
+          eyebrow && (
+            <p class="text-brand-800 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] uppercase">
+              <span class="bg-brand-500 block h-px w-9" aria-hidden="true" />
+              {eyebrow}
+            </p>
+          )
+        }
+        <h1
+          class="text-ink-950 mt-6 max-w-[14ch] text-[clamp(2.8rem,6vw,6rem)] leading-[0.95] font-semibold tracking-[-0.055em] text-balance"
+        >
+          {title}
+        </h1>
+        {
+          image && description && (
+            <p class="text-ink-600 mt-7 max-w-xl text-lg leading-relaxed text-pretty">{description}</p>
+          )
+        }
+      </div>
+
+      {
+        image ? (
+          <div class="relative h-[46dvh] min-h-[22rem] overflow-hidden rounded-[2rem] bg-[#ddd7ce] lg:h-[34rem] lg:rounded-[2.5rem]">
+            <Image
+              src={image}
+              alt={imageAlt}
+              data-parallax-media
+              class="parallax-media absolute -inset-[7%] size-[114%] object-cover"
+              widths={[640, 900, 1200]}
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              loading="eager"
+            />
+            <div class="pointer-events-none absolute inset-0 ring-1 ring-white/20 ring-inset" />
+          </div>
+        ) : (
+          description && (
+            <div class="border-ink-300 max-w-xl border-l pl-6 lg:mb-2 lg:justify-self-end">
+              <p class="text-ink-600 text-lg leading-relaxed text-pretty sm:text-xl">{description}</p>
+            </div>
+          )
+        )
+      }
+    </div>
   </div>
 </section>

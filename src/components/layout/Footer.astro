@@ -10,11 +10,11 @@ const socialIcons = { instagram: InstagramIcon, facebook: FacebookIcon };
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-ink-100 bg-ink-950 text-ink-300 border-t">
+<footer class="text-ink-600 border-t border-[#ded8cf] bg-[#f7f4ef]">
   <div class="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
     <div class="flex flex-col gap-4 lg:col-span-1">
-      <Logo theme="light" />
-      <p class="text-ink-400 max-w-xs text-sm leading-relaxed">
+      <Logo theme="dark" />
+      <p class="text-ink-500 max-w-xs text-sm leading-relaxed">
         Empresa familiar con más de {SITE.yearsOfExperience} años construyendo confianza, un proyecto a la vez.
       </p>
       <div class="flex items-center gap-3 pt-2">
@@ -27,7 +27,7 @@ const year = new Date().getFullYear();
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${SITE.name} en ${social.label}`}
-                class="hover:bg-brand-600 inline-flex size-10 items-center justify-center rounded-full bg-white/5 text-white transition-colors"
+                class="border-ink-200 text-ink-800 hover:border-brand-500 hover:bg-brand-500 inline-flex size-10 items-center justify-center rounded-full border bg-white/60 transition-colors"
               >
                 <Icon class="size-4.5" aria-hidden="true" />
               </a>
@@ -38,12 +38,12 @@ const year = new Date().getFullYear();
     </div>
 
     <nav aria-label="Navegación del pie de página">
-      <h2 class="text-sm font-semibold text-white">Navegación</h2>
+      <h2 class="text-ink-950 text-sm font-semibold">Navegación</h2>
       <ul class="mt-4 space-y-3">
         {
           NAV_LINKS.map((link) => (
             <li>
-              <a href={link.href} class="text-sm transition-colors hover:text-white">
+              <a href={link.href} class="hover:text-ink-950 text-sm transition-colors">
                 {link.label}
               </a>
             </li>
@@ -53,12 +53,12 @@ const year = new Date().getFullYear();
     </nav>
 
     <nav aria-label="Servicios">
-      <h2 class="text-sm font-semibold text-white">Servicios</h2>
+      <h2 class="text-ink-950 text-sm font-semibold">Servicios</h2>
       <ul class="mt-4 space-y-3">
         {
           SERVICES.map((service) => (
             <li>
-              <a href={`/servicios/${service.slug}`} class="text-sm transition-colors hover:text-white">
+              <a href={`/servicios/${service.slug}`} class="hover:text-ink-950 text-sm transition-colors">
                 {service.title}
               </a>
             </li>
@@ -68,28 +68,28 @@ const year = new Date().getFullYear();
     </nav>
 
     <div>
-      <h2 class="text-sm font-semibold text-white">Contacto</h2>
+      <h2 class="text-ink-950 text-sm font-semibold">Contacto</h2>
       <ul class="mt-4 space-y-3 text-sm">
         <li class="flex items-start gap-2.5">
-          <Phone class="text-brand-500 mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <Phone class="text-brand-700 mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <span>
             {WHATSAPP_CONTACTS[0].name}: {WHATSAPP_CONTACTS[0].phoneDisplay}<br />
             {WHATSAPP_CONTACTS[1].name}: {WHATSAPP_CONTACTS[1].phoneDisplay}
           </span>
         </li>
         <li class="flex items-center gap-2.5">
-          <Mail class="text-brand-500 size-4 shrink-0" aria-hidden="true" />
-          <a href={`mailto:${CONTACT.email}`} class="transition-colors hover:text-white">{CONTACT.email}</a>
+          <Mail class="text-brand-700 size-4 shrink-0" aria-hidden="true" />
+          <a href={`mailto:${CONTACT.email}`} class="hover:text-ink-950 transition-colors">{CONTACT.email}</a>
         </li>
         <li class="flex items-center gap-2.5">
-          <MapPin class="text-brand-500 size-4 shrink-0" aria-hidden="true" />
+          <MapPin class="text-brand-700 size-4 shrink-0" aria-hidden="true" />
           <span>{CONTACT.areaServed}</span>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
+  <div class="border-ink-200 border-t">
     <div
       class="container-page text-ink-500 flex flex-col items-center justify-between gap-3 py-6 text-xs sm:flex-row"
     >

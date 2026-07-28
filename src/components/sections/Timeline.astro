@@ -4,20 +4,41 @@ import { TIMELINE } from '../../data/timeline';
 ---
 
 <section class="container-page py-24 sm:py-32">
-  <SectionHeading eyebrow="Nuestro Camino" title="18 años de crecimiento, obra a obra." />
+  <div class="mx-auto max-w-6xl">
+    <SectionHeading eyebrow="Nuestro Camino" title="18 años de crecimiento, obra a obra." />
 
-  <ol class="border-ink-200 relative mt-16 space-y-10 border-s ps-8 sm:ps-10">
-    {
-      TIMELINE.map((milestone, index) => (
-        <li class="reveal relative" data-reveal-delay={index * 0.06}>
-          <span class="bg-brand-500 text-ink-950 absolute -start-[2.55rem] top-1 flex size-8 items-center justify-center rounded-full text-xs font-bold sm:-start-[3.05rem]">
-            {index + 1}
-          </span>
-          <p class="text-brand-700 text-sm font-semibold tracking-wide uppercase">{milestone.year}</p>
-          <h3 class="text-ink-950 mt-1.5 text-xl font-semibold">{milestone.title}</h3>
-          <p class="text-ink-500 mt-2 max-w-2xl">{milestone.description}</p>
-        </li>
-      ))
-    }
-  </ol>
+    <ol
+      class="relative mt-16 space-y-12 ps-14 sm:mt-20 sm:space-y-16 sm:ps-20"
+      aria-label="Historia de Grupo CGR"
+    >
+      <span
+        class="bg-ink-200 pointer-events-none absolute top-4 bottom-4 left-[1.1rem] w-px sm:left-[1.35rem]"
+        aria-hidden="true"
+      >
+      </span>
+      <span
+        class="timeline-progress-line bg-brand-500 pointer-events-none absolute top-4 bottom-4 left-[1.1rem] w-[2px] origin-top sm:left-[1.35rem]"
+        aria-hidden="true"
+      >
+      </span>
+
+      {
+        TIMELINE.map((milestone, index) => (
+          <li class="timeline-milestone relative min-h-28" style={`--timeline-index:${index}`}>
+            <span class="border-ink-200 text-ink-800 absolute -start-[3.48rem] top-0.5 flex size-9 items-center justify-center overflow-hidden rounded-full border bg-white text-xs font-semibold sm:-start-[4.9rem] sm:size-11">
+              <span
+                class="timeline-marker-fill bg-brand-500 absolute inset-0 rounded-full"
+                aria-hidden="true"
+              />
+              <span class="relative z-10">{index + 1}</span>
+            </span>
+
+            <p class="text-brand-700 text-sm font-semibold tracking-wide uppercase">{milestone.year}</p>
+            <h3 class="text-ink-950 mt-1.5 text-xl font-semibold sm:text-2xl">{milestone.title}</h3>
+            <p class="text-ink-500 mt-3 max-w-2xl leading-relaxed">{milestone.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
 </section>

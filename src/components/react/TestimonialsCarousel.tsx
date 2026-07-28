@@ -108,8 +108,8 @@ function StarIcon({ filled }: { filled: boolean }) {
       viewBox="0 0 24 24"
       width="18"
       height="18"
-      fill={filled ? '#ea4c05' : 'none'}
-      stroke={filled ? '#ea4c05' : '#c5c6cb'}
+      fill={filled ? '#ffb075' : 'none'}
+      stroke={filled ? '#ffb075' : '#c5c6cb'}
       strokeWidth="1.5"
     >
       <path

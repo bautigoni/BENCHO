@@ -10,6 +10,7 @@ export interface Service {
   slug: string;
   title: string;
   tagline: string;
+  whatsappMessage: string;
   icon: 'paint-roller' | 'layers' | 'building-2' | 'square-stack' | 'refresh-ccw' | 'hammer';
   image: ImageMetadata;
   imageAlt: string;
@@ -23,6 +24,8 @@ export const SERVICES: Service[] = [
     slug: 'pintura',
     title: 'Pintura',
     tagline: 'Color, protección y una terminación impecable en cada superficie.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de un trabajo de pintura. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'paint-roller',
     image: pinturaImg,
     imageAlt: 'Fachadas de viviendas recién pintadas en un barrio residencial',
@@ -47,6 +50,8 @@ export const SERVICES: Service[] = [
     slug: 'revestimientos-texturados',
     title: 'Revestimientos Texturados',
     tagline: 'Textura, carácter y una protección superior para tus fachadas.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de un revestimiento texturado. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'layers',
     image: revestimientoImg,
     imageAlt: 'Fachada con revestimiento texturado gris en construcción frente al agua',
@@ -71,6 +76,8 @@ export const SERVICES: Service[] = [
     slug: 'estuco',
     title: 'Estuco',
     tagline: 'La elegancia serena de una superficie perfectamente lisa.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de un trabajo de estuco. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'building-2',
     image: estucoImg,
     imageAlt: 'Vivienda de dos plantas con terminación en estuco blanco liso',
@@ -95,6 +102,8 @@ export const SERVICES: Service[] = [
     slug: 'microcemento',
     title: 'Microcemento',
     tagline: 'El acabado continuo y sofisticado que redefine cualquier espacio.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de un trabajo de microcemento. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'square-stack',
     image: microcementoImg,
     imageAlt: 'Fachada moderna revestida en microcemento oscuro con grandes ventanales',
@@ -119,6 +128,8 @@ export const SERVICES: Service[] = [
     slug: 'renovaciones',
     title: 'Renovaciones',
     tagline: 'Le devolvemos a tu propiedad la vida que se merece.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de una renovación. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'refresh-ccw',
     image: renovacionesImg,
     imageAlt: 'Comparación antes y después de la renovación de fachada de una vivienda',
@@ -143,6 +154,8 @@ export const SERVICES: Service[] = [
     slug: 'remodelaciones',
     title: 'Remodelaciones',
     tagline: 'Transformamos espacios completos, de punta a punta.',
+    whatsappMessage:
+      'Hola Grupo CGR. Quisiera consultar el precio de una remodelación. ¿Qué información necesitan para preparar el presupuesto?',
     icon: 'hammer',
     image: remodelacionesImg,
     imageAlt: 'Garage remodelado con piso de microcemento pulido',

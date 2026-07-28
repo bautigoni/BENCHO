@@ -7,6 +7,7 @@ interface Props {
   variant?: 'primary' | 'dark' | 'outline' | 'ghost';
   size?: 'md' | 'lg';
   whatsapp?: boolean;
+  whatsappMessage?: string;
   ctaLocation?: string;
   showArrow?: boolean;
   class?: string;
@@ -17,6 +18,7 @@ const {
   variant = 'primary',
   size = 'md',
   whatsapp = false,
+  whatsappMessage,
   ctaLocation,
   showArrow = false,
   class: className = ''
@@ -27,7 +29,7 @@ const resolvedHref = whatsapp ? DEFAULT_WHATSAPP_HREF : (href ?? '#');
 const variants = {
   primary:
     'bg-brand-500 text-ink-950 hover:bg-brand-600 shadow-md shadow-brand-950/10 hover:shadow-lg hover:shadow-brand-950/15',
-  dark: 'bg-ink-950 text-white hover:bg-ink-800 shadow-md shadow-ink-950/10 hover:shadow-lg',
+  dark: 'bg-surface-dark text-white hover:bg-surface-dark-elevated shadow-md shadow-black/10 hover:shadow-lg',
   outline: 'border border-ink-200 text-ink-800 hover:border-ink-950 hover:bg-ink-50',
   ghost: 'text-ink-800 hover:bg-ink-100'
 };
@@ -41,6 +43,7 @@ const sizes = {
 <a
   href={resolvedHref}
   data-whatsapp-cta={whatsapp ? true : undefined}
+  data-whatsapp-message={whatsappMessage}
   data-cta-location={ctaLocation}
   data-track={ctaLocation ? 'cta_click' : undefined}
   class:list={[

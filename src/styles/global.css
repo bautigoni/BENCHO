@@ -4,17 +4,21 @@
   --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  --color-brand-50: #fff6ed;
-  --color-brand-100: #ffead4;
-  --color-brand-200: #ffd1a8;
-  --color-brand-300: #ffb071;
-  --color-brand-400: #ff8638;
-  --color-brand-500: #f9640f;
-  --color-brand-600: #ea4c05;
-  --color-brand-700: #c23807;
-  --color-brand-800: #9a2d0e;
-  --color-brand-900: #7c280f;
-  --color-brand-950: #431105;
+  --color-brand-50: #fff8f2;
+  --color-brand-100: #ffefdf;
+  --color-brand-200: #ffdec4;
+  --color-brand-300: #ffd0a9;
+  --color-brand-400: #ffb075;
+  --color-brand-500: #ffb075;
+  --color-brand-600: #e98b4b;
+  --color-brand-700: #ad5529;
+  --color-brand-800: #88401d;
+  --color-brand-900: #6e3418;
+  --color-brand-950: #3e1c0c;
+
+  --color-surface-dark: #454548;
+  --color-surface-dark-elevated: #505054;
+  --color-logo-gray: #919193;
 
   --color-ink-50: #f6f6f7;
   --color-ink-100: #e2e3e5;
@@ -150,5 +154,245 @@
   .js .reveal.is-visible {
     animation: var(--animate-fade-up);
     animation-delay: var(--reveal-delay, 0s);
+  }
+
+  .parallax-media {
+    transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.08);
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .parallax-content {
+    opacity: var(--parallax-opacity, 1);
+    transform: translate3d(0, var(--parallax-content-y, 0), 0);
+    will-change: transform, opacity;
+  }
+
+  .scroll-progress {
+    transform: scaleX(var(--scroll-progress, 0));
+    will-change: transform;
+  }
+
+  .gallery-carousel {
+    --gc-n: 8;
+    --gc-base-w: 21rem;
+    --gc-active-w: 33rem;
+    --gc-base-h: 15rem;
+    --gc-active-h: 21rem;
+    --gc-gap: 1rem;
+    --gc-dim-w: calc((var(--gc-base-w) * var(--gc-n) - var(--gc-active-w)) / (var(--gc-n) - 1));
+
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  }
+
+  .gallery-carousel.is-dragging {
+    cursor: grabbing;
+  }
+
+  .gallery-flow {
+    width: max-content;
+    will-change: transform;
+  }
+
+  .gallery-shift {
+    display: flex;
+    width: max-content;
+    gap: var(--gc-gap);
+    transform: translate3d(var(--shift, 0px), 0, 0);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .gallery-track {
+    display: flex;
+    height: calc(var(--gc-active-h) + 2rem);
+    align-items: center;
+    gap: var(--gc-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gallery-item {
+    position: relative;
+    width: var(--gc-base-w);
+    height: var(--gc-base-h);
+    flex: none;
+    overflow: hidden;
+    border-radius: 1.4rem;
+    background: var(--color-ink-100);
+    transition:
+      width 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      height 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-card-hit {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: inherit;
+    border: 0;
+    padding: 0;
+    color: white;
+    text-align: left;
+  }
+
+  .gallery-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .gallery-item.is-active {
+    width: var(--gc-active-w);
+    height: var(--gc-active-h);
+    box-shadow: 0 24px 60px -24px rgb(69 69 72 / 0.3);
+  }
+
+  .gallery-item.is-dim {
+    width: var(--gc-dim-w);
+  }
+
+  .gallery-caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.4rem;
+    background: linear-gradient(180deg, transparent 45%, rgb(26 26 28 / 0.84) 100%);
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .gallery-caption p {
+    margin: 0;
+    color: rgb(255 255 255 / 0.78);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .gallery-caption .gallery-caption-title {
+    color: white;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .gallery-item.is-active .gallery-caption {
+    opacity: 1;
+  }
+
+  .gallery-measuring * {
+    transition: none !important;
+  }
+
+  @media (max-width: 760px) {
+    .gallery-carousel {
+      --gc-base-w: min(15rem, calc(100vw - 6rem));
+      --gc-active-w: min(21rem, calc(100vw - 4rem));
+      --gc-base-h: 11rem;
+      --gc-active-h: 14.5rem;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .timeline-progress-line {
+      animation: timeline-line-draw linear both;
+      animation-timeline: view(block);
+      animation-range: entry 12% exit 78%;
+      transform: scaleY(0);
+      will-change: transform;
+    }
+
+    .timeline-milestone {
+      view-timeline-name: --timeline-milestone;
+      view-timeline-axis: block;
+      animation: timeline-item-focus linear both;
+      animation-timeline: --timeline-milestone;
+      animation-range: cover 18% cover 42%;
+      will-change: transform, opacity;
+    }
+
+    .timeline-marker-fill {
+      animation: timeline-marker-activate linear both;
+      animation-timeline: --timeline-milestone;
+      animation-range: cover 34% cover 39%;
+      transform: scale(0.35);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    @keyframes timeline-line-draw {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes timeline-item-focus {
+      from {
+        opacity: 0.35;
+        transform: translate3d(0, 1.25rem, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes timeline-marker-activate {
+      from {
+        opacity: 0;
+        transform: scale(0.35);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-media,
+    .parallax-content,
+    .scroll-progress {
+      opacity: 1;
+      transform: none;
+    }
+
+    .timeline-progress-line {
+      animation: none;
+      transform: scaleY(1);
+    }
+
+    .timeline-milestone {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .timeline-marker-fill {
+      animation: none;
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }

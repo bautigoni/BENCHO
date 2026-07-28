@@ -13,80 +13,74 @@ function isActive(href: string): boolean {
 
 <header
   data-header
-  data-elevated="false"
-  class="group bg-ink-950 sticky top-0 z-50 transition-shadow duration-300 data-[elevated=true]:shadow-xl data-[elevated=true]:shadow-black/50"
+  data-visible="false"
+  class="fixed inset-x-0 top-0 z-50 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
 >
-  <div
-    class="pointer-events-none absolute inset-x-0 bottom-0 h-px overflow-hidden bg-white/10"
-    aria-hidden="true"
-  >
+  <div class="container-page pt-3">
     <div
-      class="via-brand-500 animate-scan-glow h-full w-1/4 bg-gradient-to-r from-transparent to-transparent"
+      data-header-shell
+      class="flex items-center justify-between rounded-2xl border border-white/80 bg-[#fbfaf7]/94 px-4 py-2.5 shadow-[0_12px_40px_rgba(70,57,45,0.12)] backdrop-blur-xl sm:px-5"
     >
-    </div>
-  </div>
-  <div
-    class="container-page flex items-center justify-between py-3.5 transition-[padding] duration-300 group-data-[elevated=true]:py-2.5"
-  >
-    <div class="animate-fade-in">
-      <Logo theme="light" />
-    </div>
+      <div class="animate-fade-in">
+        <Logo theme="dark" />
+      </div>
 
-    <nav aria-label="Navegación principal" class="hidden items-center gap-1 md:flex">
-      {
-        NAV_LINKS.map((link) => (
-          <a
-            href={link.href}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-            class:list={[
-              'group/link relative rounded-full px-4 py-2 text-sm font-medium transition-colors',
-              isActive(link.href) ? 'text-white' : 'text-white/60 hover:text-white'
-            ]}
-          >
-            {link.label}
-            <span
+      <nav aria-label="Navegación principal" class="hidden items-center gap-1 md:flex">
+        {
+          NAV_LINKS.map((link) => (
+            <a
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
               class:list={[
-                'bg-brand-400 absolute inset-x-4 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-300 ease-out group-hover/link:scale-x-100',
-                isActive(link.href) && 'scale-x-100'
+                'group/link relative rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                isActive(link.href) ? 'text-ink-950' : 'text-ink-500 hover:text-ink-950'
               ]}
-              aria-hidden="true"
-            />
-          </a>
-        ))
-      }
-    </nav>
+            >
+              {link.label}
+              <span
+                class:list={[
+                  'bg-brand-500 absolute inset-x-4 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-300 ease-out group-hover/link:scale-x-100',
+                  isActive(link.href) && 'scale-x-100'
+                ]}
+                aria-hidden="true"
+              />
+            </a>
+          ))
+        }
+      </nav>
 
-    <div class="flex items-center gap-2">
-      <a
-        href={DEFAULT_WHATSAPP_HREF}
-        data-whatsapp-cta
-        data-cta-location="header"
-        data-track="cta_click"
-        class="bg-brand-500 text-ink-950 hover:bg-brand-400 hidden items-center rounded-full px-5 py-2.5 text-sm font-semibold shadow-md shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-lg sm:inline-flex"
-      >
-        Solicitar Presupuesto
-      </a>
+      <div class="flex items-center gap-2">
+        <a
+          href={DEFAULT_WHATSAPP_HREF}
+          data-whatsapp-cta
+          data-cta-location="header"
+          data-track="cta_click"
+          class="bg-brand-500 text-ink-950 hover:bg-brand-600 hidden items-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 sm:inline-flex"
+        >
+          Solicitar Presupuesto
+        </a>
 
-      <button
-        type="button"
-        data-menu-toggle
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Abrir menú de navegación"
-        class="group/burger relative inline-flex size-11 shrink-0 items-center justify-center rounded-full text-white transition-all hover:bg-white/10 active:scale-90 md:hidden"
-      >
-        <span class="relative flex h-3.5 w-5 flex-col justify-between">
-          <span
-            class="h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 group-aria-expanded/burger:translate-y-[6px] group-aria-expanded/burger:rotate-45"
-          ></span>
-          <span
-            class="h-0.5 w-full rounded-full bg-current transition-opacity duration-200 group-aria-expanded/burger:opacity-0"
-          ></span>
-          <span
-            class="h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 group-aria-expanded/burger:-translate-y-[6px] group-aria-expanded/burger:-rotate-45"
-          ></span>
-        </span>
-      </button>
+        <button
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Abrir menú de navegación"
+          class="group/burger text-ink-900 hover:bg-ink-100 relative inline-flex size-11 shrink-0 items-center justify-center rounded-full transition-all active:scale-90 md:hidden"
+        >
+          <span class="relative flex h-3.5 w-5 flex-col justify-between">
+            <span
+              class="h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 group-aria-expanded/burger:translate-y-[6px] group-aria-expanded/burger:rotate-45"
+            ></span>
+            <span
+              class="h-0.5 w-full rounded-full bg-current transition-opacity duration-200 group-aria-expanded/burger:opacity-0"
+            ></span>
+            <span
+              class="h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 group-aria-expanded/burger:-translate-y-[6px] group-aria-expanded/burger:-rotate-45"
+            ></span>
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -94,8 +88,7 @@ function isActive(href: string): boolean {
     id="mobile-menu"
     data-menu-panel
     data-state="closed"
-    style="top: var(--header-h, 4rem)"
-    class="group/menu bg-ink-950 fixed inset-x-0 bottom-0 z-40 flex flex-col gap-1 overflow-y-auto p-6 transition-[opacity,visibility] duration-300 ease-out data-[state=closed]:pointer-events-none data-[state=closed]:invisible data-[state=closed]:opacity-0 data-[state=open]:opacity-100 md:hidden"
+    class="group/menu fixed inset-x-3 top-[5.5rem] bottom-3 z-40 flex flex-col gap-1 overflow-y-auto rounded-3xl border border-white/80 bg-[#fbfaf7]/98 p-6 shadow-[0_24px_70px_rgba(70,57,45,0.18)] backdrop-blur-xl transition-[opacity,visibility,transform] duration-300 ease-out data-[state=closed]:pointer-events-none data-[state=closed]:invisible data-[state=closed]:translate-y-3 data-[state=closed]:opacity-0 data-[state=open]:translate-y-0 data-[state=open]:opacity-100 md:hidden"
   >
     {
       NAV_LINKS.map((link, index) => (
@@ -104,7 +97,7 @@ function isActive(href: string): boolean {
           style={`transition-delay:${index * 60}ms`}
           class:list={[
             'translate-y-2 rounded-2xl px-4 py-3.5 text-lg font-medium opacity-0 transition-[opacity,transform,background-color] duration-300 ease-out group-data-[state=open]/menu:translate-y-0 group-data-[state=open]/menu:opacity-100 active:scale-95',
-            isActive(link.href) ? 'bg-white/10 text-white' : 'text-white/70'
+            isActive(link.href) ? 'bg-brand-100 text-ink-950' : 'text-ink-600 hover:text-ink-950'
           ]}
         >
           {link.label}
@@ -124,18 +117,36 @@ function isActive(href: string): boolean {
   </div>
 </header>
 
+<style is:global>
+  .js [data-header][data-visible='false'] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+</style>
+
 <script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+  const hasTopBrand = Boolean(document.querySelector('[data-top-brand]'));
+
+  const syncVisibility = () => {
+    if (!header) return;
+    const menuIsOpen = panel?.dataset.state === 'open';
+    header.dataset.visible = !hasTopBrand || window.scrollY > 64 || menuIsOpen ? 'true' : 'false';
+  };
 
   if (toggle && panel) {
     const close = () => {
       toggle.setAttribute('aria-expanded', 'false');
       panel.dataset.state = 'closed';
       document.body.style.removeProperty('overflow');
+      syncVisibility();
     };
 
     const open = () => {
+      if (header) header.dataset.visible = 'true';
       toggle.setAttribute('aria-expanded', 'true');
       panel.dataset.state = 'open';
       document.body.style.overflow = 'hidden';
@@ -156,16 +167,13 @@ function isActive(href: string): boolean {
     });
   }
 
-  const header = document.querySelector<HTMLElement>('[data-header]');
   if (header) {
-    const updateElevation = () => {
-      header.dataset.elevated = window.scrollY > 8 ? 'true' : 'false';
-    };
-    updateElevation();
-    window.addEventListener('scroll', updateElevation, { passive: true });
+    syncVisibility();
+    window.addEventListener('scroll', syncVisibility, { passive: true });
 
     const syncHeaderHeight = () => {
-      document.documentElement.style.setProperty('--header-h', `${header.offsetHeight}px`);
+      const shell = header.querySelector<HTMLElement>('[data-header-shell]');
+      if (shell) document.documentElement.style.setProperty('--header-h', `${shell.offsetHeight}px`);
     };
     syncHeaderHeight();
     window.addEventListener('resize', syncHeaderHeight);

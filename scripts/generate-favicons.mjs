@@ -1,5 +1,5 @@
-// Rasterizes the real Grupo CGR logo (src/assets/images/logo-instagram.jpg)
-// into the favicon set under public/. Re-run after replacing the source logo.
+// Rasterizes the transparent Grupo CGR logo into the favicon set under public/.
+// Re-run after replacing the source logo.
 // Run with: node scripts/generate-favicons.mjs
 import sharp from 'sharp';
 import pngToIco from 'png-to-ico';
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
-const sourceLogo = path.join(root, 'src/assets/images/logo-instagram.jpg');
+const sourceLogo = path.join(root, 'src/assets/images/logo-transparent.png');
 const publicDir = path.join(root, 'public');
 
 const targets = [

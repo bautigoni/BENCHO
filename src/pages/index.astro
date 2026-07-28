@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
+import ScrollStory from '../components/sections/ScrollStory.astro';
 import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
 import FeaturedServices from '../components/sections/FeaturedServices.astro';
 import ProcessTimeline from '../components/sections/ProcessTimeline.astro';
@@ -12,6 +13,7 @@ import { SITE } from '../consts';
 
 <BaseLayout title={SITE.name} description={SITE.description}>
   <Hero />
+  <ScrollStory />
   <WhyChooseUs />
   <FeaturedServices />
   <ProcessTimeline />

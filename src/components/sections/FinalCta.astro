@@ -4,18 +4,21 @@ import { SITE } from '../../consts';
 import { DEFAULT_WHATSAPP_HREF } from '../../lib/whatsapp';
 ---
 
-<section class="bg-ink-950 relative overflow-hidden py-24 sm:py-32">
+<section class="relative overflow-hidden border-y border-[#ded8cf] bg-[#efe9e1] py-24 sm:py-32">
   <div
-    class="bg-brand-500/20 pointer-events-none absolute -top-1/2 left-1/2 aspect-square w-[60rem] -translate-x-1/2 rounded-full blur-3xl"
+    class="bg-brand-500/30 pointer-events-none absolute -top-2/3 left-1/2 aspect-square w-[55rem] -translate-x-1/2 rounded-full blur-3xl"
     aria-hidden="true"
   >
   </div>
 
   <div class="container-page relative text-center">
-    <h2 class="reveal mx-auto max-w-3xl text-3xl font-bold text-balance text-white sm:text-5xl">
+    <p class="reveal text-brand-800 text-xs font-semibold tracking-[0.18em] uppercase">
+      Hablemos de tu proyecto
+    </p>
+    <h2 class="reveal text-ink-950 mx-auto mt-5 max-w-3xl text-3xl font-semibold text-balance sm:text-5xl">
       Tu proyecto merece un equipo en el que puedas confiar.
     </h2>
-    <p class="reveal mx-auto mt-5 max-w-xl text-lg text-pretty text-white/70">
+    <p class="reveal text-ink-600 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-pretty">
       Contanos qué necesitás y te respondemos por WhatsApp con la misma transparencia que nos define desde {
         SITE.foundingYear
       }.
